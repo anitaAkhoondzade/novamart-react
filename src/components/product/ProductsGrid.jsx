@@ -1,6 +1,6 @@
-import ProductCard from "../product/ProductCard";
+import ProductCard from "./ProductCard";
 
-export default function FeaturedProducts({products}) {
+export default function ProductsGrid({products}) {
   return (
     <section>
       <div className="max-w-7xl mx-auto px-8 py-20">
