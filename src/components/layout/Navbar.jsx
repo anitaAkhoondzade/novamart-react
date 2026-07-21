@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -7,17 +7,38 @@ export default function Navbar() {
         <Link to="/" className="text-2xl font-bold">
           NovaMart
         </Link>
-        <ul className="flex gap-6">
-          <li>
-            <Link to="/">Home</Link>
+        <ul className="hidden md:flex gap-6">
+          <li className="transition-colors">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                 isActive ? "text-purple-500" : "text-white hover:text-purple-400"
+              }
+            >
+              Home
+            </NavLink>
           </li>
 
-          <li>
-            <Link to="/products">Products</Link>
+          <li className="transition-colors">
+            <NavLink
+              to="/products"
+              className={({ isActive }) =>
+                 isActive ? "text-purple-500" : "text-white hover:text-purple-400"
+              }
+            >
+              Products
+            </NavLink>
           </li>
 
-          <li>
-            <Link to="/about">About</Link>
+          <li className="transition-colors">
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                 isActive ? "text-purple-500" : "text-white hover:text-purple-400"
+              }
+            >
+              About
+            </NavLink>
           </li>
         </ul>
 
@@ -25,10 +46,14 @@ export default function Navbar() {
           <input
             type="search"
             placeholder="Search products..."
-            className="w-64 rounded-lg border border-gray-300 px-3 py-2 text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="hidden md:block w-64 rounded-lg border border-gray-300 px-3 py-2 text-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
-          <Link to="/cart">Cart</Link>
-          <Link to="/login">Login</Link>
+          <Link to="/cart" className="transition-colors hover:text-purple-400">
+            Cart
+          </Link>
+          <Link to="/login" className="transition-colors hover:text-purple-400">
+            Login
+          </Link>
         </div>
       </div>
     </nav>
