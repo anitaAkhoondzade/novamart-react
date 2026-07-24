@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ProductCard({ product }) {
   const { title, price, image, rating } = product;
   return (
@@ -14,9 +16,12 @@ export default function ProductCard({ product }) {
         <span>
           ⭐ {rating?.rate} ({rating?.count} reviews)
         </span>
-        <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 rounded-lg cursor-pointer">
-          Add to Cart
-        </button>
+        <Link
+          to={`/products/${product.id}`}
+          className="flex w-full items-center justify-center rounded-lg bg-purple-600 py-3 font-medium text-white transition-colors hover:bg-purple-700"
+        >
+          View Details
+        </Link>
       </div>
     </article>
   );
