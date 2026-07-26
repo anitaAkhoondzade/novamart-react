@@ -29,7 +29,9 @@ export default function ProductDetails() {
       />
     );
 
-  return (<section>
-    <ProductInfo product={product} />
-  </section>)
+  return (
+    <section>
+      <ProductInfo product={product} />
+    </section>
+  );
 }

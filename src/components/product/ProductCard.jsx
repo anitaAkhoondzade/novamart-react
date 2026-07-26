@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Rating from "../common/Rating";
 
 export default function ProductCard({ product }) {
   const { title, price, image, rating } = product;
@@ -13,9 +14,7 @@ export default function ProductCard({ product }) {
       <div className="p-4 flex flex-col gap-3">
         <h3 className="text-lg font-semibold">{title}</h3>
         <p className="text-xl font-bold text-purple-600">{`$${price}`}</p>
-        <span>
-          ⭐ {rating?.rate} ({rating?.count} reviews)
-        </span>
+         <Rating rate={rating.rate} count={rating.count} />
         <Link
           to={`/products/${product.id}`}
           className="flex w-full items-center justify-center rounded-lg bg-purple-600 py-3 font-medium text-white transition-colors hover:bg-purple-700"
