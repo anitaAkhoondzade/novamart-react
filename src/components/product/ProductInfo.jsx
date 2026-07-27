@@ -1,4 +1,5 @@
 import ProductActions from "./ProductActions";
+import ProductDescription from "./ProductDescription";
 import ProductHeader from "./ProductHeader";
 import ProductImage from "./ProductImage";
 import ProductPrice from "./ProductPrice";
@@ -15,12 +16,8 @@ export default function ProductInfo({ product }) {
         <div className="flex-1">
           <ProductHeader title={title} category={category} rating={rating} />
           <ProductPrice price={price} inStock={inStock} />
-          <ProductActions />
-          <div className="mt-8">
-            <h2 className="mb-3 text-lg font-semibold">Description</h2>
-
-            <p className="leading-7 text-gray-600">{description}</p>
-          </div>
+          <ProductActions product={product} />
+          <ProductDescription description={description} />
         </div>
       </div>
     </div>
