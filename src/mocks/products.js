@@ -7,6 +7,7 @@ const products = [
     description:
       "The latest Apple smartphone featuring a powerful A18 chip, stunning OLED display, advanced cameras, and long-lasting battery life.",
     image: "https://placehold.co/400x400",
+    inStock: true,
     rating: {
       rate: 5,
       count: 120,
@@ -20,6 +21,7 @@ const products = [
     description:
       "A lightweight and powerful laptop with Apple's latest processor, perfect for work, study, and everyday productivity.",
     image: "https://placehold.co/400x400",
+    inStock: true,
     rating: {
       rate: 4,
       count: 85,
@@ -33,6 +35,7 @@ const products = [
     description:
       "Premium wireless earbuds with Active Noise Cancellation, Transparency Mode, and immersive spatial audio.",
     image: "https://placehold.co/400x400",
+    inStock: false,
     rating: {
       rate: 2,
       count: 240,
