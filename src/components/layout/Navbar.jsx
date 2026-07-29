@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 
 export default function Navbar() {
   const [search, setSearch] = useState("");
+  const { cart } = useContext(CartContext)
   return (
     <nav className="bg-slate-900 text-white">
       <div className="flex items-center justify-between  gap-10 max-w-7xl mx-auto px-8 py-4">
@@ -60,7 +62,7 @@ export default function Navbar() {
           />
           <p>{search}</p>
           <Link to="/cart" className="transition-colors hover:text-purple-400">
-            Cart
+            Cart ({cart.length})
           </Link>
           <Link to="/login" className="transition-colors hover:text-purple-400">
             Login
