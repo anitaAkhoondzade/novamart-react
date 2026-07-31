@@ -4,9 +4,27 @@ import { CartContext } from "../../context/CartContext";
 export default function ProductActions({ product }) {
   const { cart, setCart } = useContext(CartContext);
   function handleAddToCart() {
-    const existingProduct = cart.find((item) => item.id === product.id);
+    const existingProduct = cart.find((item) => item.product.id === product.id);
     if (!existingProduct) {
-      setCart((prevCart) => [...prevCart, product]);
+      setCart((prevCart) => [
+        ...prevCart,
+        {
+          product,
+          quantity: 1,
+        },
+      ]);
+    } else {
+      const newCart = cart.map((item) => {
+        if (item.product.id === existingProduct.product.id) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
+        } else {
+          return item;
+        }
+      });
+      setCart(newCart)
     }
   }
   useEffect(() => {

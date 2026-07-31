@@ -14,12 +14,13 @@ export default function Cart() {
       />
     );
   return (
-    <div className="max-w-7xl mx-auto px-8 py-20">
-      {cart.map((product) => (
-        <div key={product.id}>
-          <CartItem product={product} />
-        </div>
-      ))}
-    </div>
+    <section className="max-w-7xl mx-auto px-8 py-20">
+      <h2 className="text-3xl font-bold mb-8">Shopping Cart</h2>
+      <div className="flex flex-col gap-6">
+        {cart.map((cartItem) => (
+          <CartItem cartItem={cartItem} key={cartItem.product.id} />
+        ))}
+      </div>
+    </section>
   );
 }
