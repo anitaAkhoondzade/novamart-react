@@ -4,7 +4,7 @@ import NoResults from "../components/common/NoResults";
 import CartItem from "../components/cart/CartItem";
 
 export default function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart, total, totalItems } = useContext(CartContext);
 
   if (cart.length === 0)
     return (
@@ -20,6 +20,22 @@ export default function Cart() {
         {cart.map((cartItem) => (
           <CartItem cartItem={cartItem} key={cartItem.product.id} />
         ))}
+      </div>
+      <div className="mt-8 ml-auto p-6 w-80 bg-white rounded-lg shadow-md">
+        <h3 className="text-2xl font-bold mb-4">Order Summary</h3>
+        <div className="space-y-2">
+          <p className="flex items-center justify-between text-xl font-medium">
+            <span>Items</span>
+            <span>{totalItems.toLocaleString()}</span>
+          </p>
+          <p className="flex items-center justify-between text-2xl font-bold">
+            <span>Total</span>
+            <span>£{total.toLocaleString()}</span>
+          </p>
+        </div>
+        <button className="mt-4 w-full rounded-lg bg-purple-600 py-3 font-medium text-white transition-colors hover:bg-purple-700 cursor-pointer">
+          Proceed to Checkout
+        </button>
       </div>
     </section>
   );
