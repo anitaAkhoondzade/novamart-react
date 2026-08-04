@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
+import { SearchContext } from "../../context/SearchContext";
 
 export default function Navbar() {
-  const [search, setSearch] = useState("");
+  const { search, setSearch } = useContext(SearchContext);
   const { totalItems } = useContext(CartContext);
   return (
     <nav className="bg-slate-900 text-white">
@@ -67,8 +68,9 @@ export default function Navbar() {
             <Link
               to="/cart"
               className="transition-colors hover:text-purple-400"
-            ></Link>
-            Cart{" "}
+            >
+              Cart
+            </Link>
             <span
               className="absolute -top-2 -right-3 bg-purple-600
 text-white text-xs

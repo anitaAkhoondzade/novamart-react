@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import EmptyState from "../components/common/EmptyState";
 import ErrorState from "../components/common/ErrorState";
 import Loading from "../components/common/Loading";
 import ProductsGrid from "../components/product/ProductsGrid";
 import { useProducts } from "../hooks/useProducts";
 import NoResults from "../components/common/NoResults";
+import { SearchContext } from "../context/SearchContext";
 
 export default function Products() {
   const { products, loading, error } = useProducts();
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [sort, setSort] = useState("default");
+
+  const { search, setSearch } = useContext(SearchContext);
 
   const normalizedSearch = search.toLowerCase();
 
