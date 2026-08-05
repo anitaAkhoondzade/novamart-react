@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import NoResults from "../components/common/NoResults";
 import CartItem from "../components/cart/CartItem";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const { cart, total, totalItems } = useContext(CartContext);
@@ -33,9 +34,12 @@ export default function Cart() {
             <span>£{total.toLocaleString()}</span>
           </p>
         </div>
-        <button className="mt-4 w-full rounded-lg bg-purple-600 py-3 font-medium text-white transition-colors hover:bg-purple-700 cursor-pointer">
+        <Link
+          to="/checkout"
+          className="mt-4 block w-full rounded-lg bg-purple-600 py-3 text-center font-medium text-white transition-colors hover:bg-purple-700"
+        >
           Proceed to Checkout
-        </button>
+        </Link>
       </div>
     </section>
   );
