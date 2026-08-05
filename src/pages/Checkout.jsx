@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import NoResults from "../components/common/NoResults";
 
 export default function Checkout() {
   const [formData, setFormData] = useState({
@@ -10,13 +11,17 @@ export default function Checkout() {
     city: "",
     postcode: "",
   });
-  const { total, totalItems, clearCart } = useContext(CartContext);
+  const { cart, total, totalItems, clearCart } = useContext(CartContext);
 
   const orderId = `NM-${Date.now()}`;
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (cart.length === 0) {
+      return;
+    }
 
     if (
       !formData.name ||
@@ -34,6 +39,22 @@ export default function Checkout() {
     navigate("/order-success", {
       state: { orderId },
     });
+  }
+  if (cart.length === 0) {
+    return (
+      <NoResults
+        title="Your cart is empty."
+        description="Please add a product before checking out."
+        action={
+          <Link
+            to="/products"
+            className="mt-2 inline-block rounded-lg bg-purple-600 px-6 py-3 font-medium text-white hover:bg-purple-700"
+          >
+            Continue Shopping
+          </Link>
+        }
+      />
+    );
   }
 
   return (
@@ -55,6 +76,7 @@ export default function Checkout() {
                     name: e.target.value,
                   })
                 }
+                required
                 className="w-full rounded-lg border border-gray-300 px-3 py-2"
               />
 
@@ -68,6 +90,7 @@ export default function Checkout() {
                     email: e.target.value,
                   })
                 }
+                required
                 className="w-full rounded-lg border border-gray-300 px-3 py-2"
               />
 
@@ -81,6 +104,7 @@ export default function Checkout() {
                     address: e.target.value,
                   })
                 }
+                required
                 className="w-full rounded-lg border border-gray-300 px-3 py-2"
               />
 
@@ -95,6 +119,7 @@ export default function Checkout() {
                       city: e.target.value,
                     })
                   }
+                  required
                   className="w-full rounded-lg border border-gray-300 px-3 py-2"
                 />
 
@@ -108,6 +133,7 @@ export default function Checkout() {
                       postcode: e.target.value,
                     })
                   }
+                  required
                   className="w-full rounded-lg border border-gray-300 px-3 py-2"
                 />
               </div>

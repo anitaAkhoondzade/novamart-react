@@ -12,6 +12,14 @@ export default function Cart() {
       <NoResults
         title="Your cart is empty."
         description="please choose a product"
+        action={
+          <Link
+            to="/products"
+            className="mt-2 inline-block rounded-lg bg-purple-600 px-6 py-3 font-medium text-white hover:bg-purple-700"
+          >
+            Continue Shopping
+          </Link>
+        }
       />
     );
   return (

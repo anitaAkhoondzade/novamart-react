@@ -1,8 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
+import NoResults from "../components/common/NoResults";
 
 export default function OrderSuccess() {
   const location = useLocation();
-  const { orderId } = location.state;
+  const orderId = location.state?.orderId;
+
+  if (!orderId) {
+    return (
+      <NoResults
+        title="Order not found"
+        description="This order could not be found."
+      />
+    );
+  }
 
   return (
     <section className="max-w-7xl mx-auto px-8 py-20">
