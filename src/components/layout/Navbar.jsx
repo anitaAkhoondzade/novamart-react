@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Navbar() {
   const { search, setSearch } = useContext(SearchContext);
   const { totalItems } = useContext(CartContext);
+  const { user, isAuthenticated , logout } = useContext(AuthContext);
   return (
     <nav className="bg-slate-900 text-white">
       <div className="flex items-center justify-between  gap-10 max-w-7xl mx-auto px-8 py-4">
@@ -63,7 +65,6 @@ export default function Navbar() {
             }}
             className="hidden md:block w-64 rounded-lg border border-gray-300 px-3 py-2 text-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
-          <p>{search}</p>
           <div className="relative">
             <Link
               to="/cart"
@@ -81,9 +82,27 @@ justify-center"
               {totalItems}
             </span>
           </div>
-          <Link to="/login" className="transition-colors hover:text-purple-400">
-            Login
-          </Link>
+          {isAuthenticated  ? (
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium">{user.email}</span>
+              <button onClick={logout} className="transition-colors hover:text-purple-400 cursor-pointer">Logout</button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link
+                to="/login"
+                className="transition-colors hover:text-purple-400"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="transition-colors hover:text-purple-400"
+              >
+                Register
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>
