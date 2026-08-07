@@ -33,9 +33,9 @@ export function AuthProvider({ children }) {
   }
 
   //  برای لاگ گرفتن و موقتی است
-  //  useEffect(() =>{
-  //     console.log(user)
-  //  }, [user])
+//   useEffect(() => {
+//   console.log("Auth user changed:", user);
+// }, [user]);
 
   function logout() {
     setUser(null);

@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -9,17 +10,26 @@ export default function Register() {
     confirmPassword: "",
   });
 
+  const [error, setError] = useState("");
+
   const { register } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from || "/";
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    setError("");
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match.");
+      setError("Passwords do not match.");
       return;
     }
 
     register(formData.name, formData.email, formData.password);
+
+    navigate(from, { replace: true });
   }
 
   return (
@@ -83,14 +93,24 @@ export default function Register() {
             required
             className="w-full rounded-lg border border-gray-300 px-3 py-2"
           />
-
+          {error && <p className="text-sm text-red-500">{error}</p>}
           <button
             type="submit"
-            className="w-full rounded-lg bg-purple-600 py-3 font-medium text-white hover:bg-purple-700"
+            className="w-full rounded-lg bg-purple-600 py-3 font-medium text-white hover:bg-purple-700 cursor-pointer"
           >
             Register
           </button>
         </form>
+        <p className="mt-6 text-center text-sm text-gray-600">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            state={{ from: location.state?.from }}
+            className="font-medium text-purple-600 hover:text-purple-700"
+          >
+            Login
+          </Link>
+        </p>
       </div>
     </section>
   );

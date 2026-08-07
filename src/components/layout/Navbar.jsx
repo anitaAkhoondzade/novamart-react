@@ -7,7 +7,9 @@ import { AuthContext } from "../../context/AuthContext";
 export default function Navbar() {
   const { search, setSearch } = useContext(SearchContext);
   const { totalItems } = useContext(CartContext);
-  const { user, isAuthenticated , logout } = useContext(AuthContext);
+  const { user, isAuthenticated, logout } = useContext(AuthContext);
+  // console.log("Navbar user:", user);
+  // console.log("Navbar authenticated:", isAuthenticated);
   return (
     <nav className="bg-slate-900 text-white">
       <div className="flex items-center justify-between  gap-10 max-w-7xl mx-auto px-8 py-4">
@@ -82,10 +84,15 @@ justify-center"
               {totalItems}
             </span>
           </div>
-          {isAuthenticated  ? (
+          {isAuthenticated ? (
             <div className="flex items-center gap-2">
               <span className="text-xs font-medium">{user.email}</span>
-              <button onClick={logout} className="transition-colors hover:text-purple-400 cursor-pointer">Logout</button>
+              <button
+                onClick={logout}
+                className="transition-colors hover:text-purple-400 cursor-pointer"
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <div className="flex items-center gap-2">
