@@ -5,8 +5,17 @@ export const CartContext = createContext();
 export function CartProvider({ children }) {
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
-    if (savedCart) return JSON.parse(savedCart);
-    else return [];
+
+    if (!savedCart) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(savedCart);
+    } catch (error) {
+      console.error("Failed to parse cart:", error);
+      return [];
+    }
   });
 
   useEffect(() => {

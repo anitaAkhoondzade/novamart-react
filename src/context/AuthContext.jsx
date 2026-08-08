@@ -5,8 +5,17 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
-    if (savedUser) return JSON.parse(savedUser);
-    else return null;
+
+    if (!savedUser) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(savedUser);
+    } catch (error) {
+      console.error("Failed to parse user:", error);
+      return null;
+    }
   });
 
   const isAuthenticated = user !== null;
@@ -33,9 +42,9 @@ export function AuthProvider({ children }) {
   }
 
   //  برای لاگ گرفتن و موقتی است
-//   useEffect(() => {
-//   console.log("Auth user changed:", user);
-// }, [user]);
+  //   useEffect(() => {
+  //   console.log("Auth user changed:", user);
+  // }, [user]);
 
   function logout() {
     setUser(null);
