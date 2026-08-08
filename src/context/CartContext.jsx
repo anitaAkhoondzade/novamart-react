@@ -19,6 +19,11 @@ export function CartProvider({ children }) {
     }
 
     const existingProduct = cart.find((item) => item.product.id === product.id);
+
+    if (existingProduct && existingProduct.quantity >= product.stock) {
+      return;
+    }
+
     if (!existingProduct) {
       setCart((prevCart) => [
         ...prevCart,
@@ -46,6 +51,10 @@ export function CartProvider({ children }) {
     const existingProduct = cart.find((item) => item.product.id === id);
 
     if (!existingProduct || !existingProduct.product.inStock) {
+      return;
+    }
+
+    if (existingProduct.quantity >= existingProduct.product.stock) {
       return;
     }
 
